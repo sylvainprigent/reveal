@@ -1,0 +1,36 @@
+{
+  "0": {
+    "Contient": "Africa",
+    "Country_State": "NaN",
+    "cuisine": "Missouri",
+    "title": "Ground Beef and Cabbage",
+    "URL": "https://www.allrecipes.com/recipe/229324/ground-beef-and-cabbage/",
+    "rating": 4.5,
+    "total_time": 60,
+    "prep_time": 15,
+    "cook_time": 45,
+    "description": "Ground beef and cabbage recipe.",
+    "ingredients": [
+      {
+        "quantity": "1",
+        "unit": "lb",
+        "name": "ground beef"
+      },
+      {
+        "quantity": "1",
+        "unit": null,
+        "name": "cabbage"
+      }
+    ],
+    "instructions": [
+      "Cook the beef.",
+      "Add the cabbage."
+    ],
+    "nutrients": {
+      "calories": "350 kcal",
+      "protein": "25 g",
+      "fat": "18 g"
+    },
+    "serves": "6 servings"
+  }
+}

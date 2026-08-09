@@ -1,0 +1,16 @@
+{
+  "recipe": {
+    "title": "Chocolate Cake",
+    "author": {
+      "name": "Alice",
+      "country": "France"
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "times": {
+        "prep": 15,
+        "cook": 30
+      }
+    }
+  }
+}

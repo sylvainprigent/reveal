@@ -1,0 +1,23 @@
+{
+  "ingredients": [
+    "flour",
+    "eggs",
+    "milk"
+  ],
+  "quantities": [
+    100,
+    2,
+    250
+  ],
+  "empty": [],
+  "nested": [
+    {
+      "name": "flour",
+      "quantity": 100
+    },
+    {
+      "name": "eggs",
+      "quantity": 2
+    }
+  ]
+}

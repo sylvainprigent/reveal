@@ -1,0 +1,19 @@
+from typing import Protocol
+
+from reveal.core.models.location import SourceLocation
+from reveal.core.models.source import Source
+
+
+class SourceProvider(Protocol):
+
+    def supports(
+        self,
+        location: SourceLocation,
+    ) -> bool:
+        ...
+
+    def create_source(
+        self,
+        location: SourceLocation,
+    ) -> Source:
+        ...

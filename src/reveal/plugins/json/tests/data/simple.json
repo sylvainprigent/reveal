@@ -1,0 +1,7 @@
+{
+  "name": "Alice",
+  "age": 42,
+  "active": true,
+  "score": 12.5,
+  "nothing": null
+}
