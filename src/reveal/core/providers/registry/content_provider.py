@@ -1,6 +1,6 @@
-from reveal.core.interfaces.registry import RegistryInterface
-from reveal.core.interfaces.content_provider import ContentProvider
-from reveal.core.models.source import Source
+from reveal.core.providers.interfaces.registry import RegistryInterface
+from reveal.core.providers.interfaces.content_provider import ContentProvider
+from reveal.core.providers.models.source import Source
 
 
 class ContentProviderRegistry(

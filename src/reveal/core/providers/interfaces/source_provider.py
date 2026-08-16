@@ -1,7 +1,7 @@
 from typing import Protocol
 
-from reveal.core.models.location import SourceLocation
-from reveal.core.models.source import Source
+from reveal.core.providers.models.location import SourceLocation
+from reveal.core.providers.models.source import Source
 
 
 class SourceProvider(Protocol):

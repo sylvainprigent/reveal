@@ -5,10 +5,10 @@ import hashlib
 import mimetypes
 from datetime import datetime
 
-from reveal.core.models.location import SourceLocation
-from reveal.core.models.source import Source
-from reveal.core.models.enums import SourceType
-from reveal.core.interfaces.source_provider import SourceProvider
+from reveal.core.providers.models.location import SourceLocation
+from reveal.core.providers.models.source import Source
+from reveal.core.providers.models.enums import SourceType
+from reveal.core.providers.interfaces.source_provider import SourceProvider
 
 
 class LocalFileSystemSourceProvider(SourceProvider):

@@ -3,7 +3,7 @@
 from typing import Protocol
 from xml.dom.minidom import Document
 
-from reveal.core.models.location import SourceLocation
+from reveal.core.providers.models.location import SourceLocation
 
 
 class DocumentProvider(Protocol):

@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from reveal.core.interfaces.location_resolver import (
+from reveal.core.providers.interfaces.location_resolver import (
     LocationResolver,
 )
-from reveal.core.models.location import SourceLocation
+from reveal.core.providers.models.location import SourceLocation
 
 
 class LocalFileSystemLocationResolver(LocationResolver):

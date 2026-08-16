@@ -1,22 +1,22 @@
 from datetime import datetime
 
-from reveal.core.interfaces.document_provider import (
+from reveal.core.providers.interfaces.document_provider import (
     DocumentProvider,
 )
-from reveal.core.models.document import (
+from reveal.core.providers.models.document import (
     Document,
     DocumentMetadata,
 )
-from reveal.core.models.enums import NodeKind, SourceType
-from reveal.core.models.node import DocumentNode
-from reveal.core.models.source import Source
-from reveal.core.registry.content_provider import (
+from reveal.core.providers.models.enums import NodeKind, SourceType
+from reveal.core.providers.models.node import DocumentNode
+from reveal.core.providers.models.source import Source
+from reveal.core.providers.registry.content_provider import (
     ContentProviderRegistry,
 )
-from reveal.core.registry.file_reader import (
+from reveal.core.providers.registry.file_reader import (
     FileReaderRegistry,
 )
-from reveal.core.registry.source_provider import (
+from reveal.core.providers.registry.source_provider import (
     SourceProviderRegistry,
 )
 
@@ -61,13 +61,9 @@ class DefaultDocumentProvider(DocumentProvider):
             LookupError: If no source provider supports the location.
         """
         source_provider = self._source_registry.resolve(location)
-
         source = source_provider.create_source(location)
-
         started_at = datetime.now()
-
         root, warnings, errors = self._load_source(source)
-
         duration = datetime.now() - started_at
 
         metadata = DocumentMetadata(
@@ -167,4 +163,3 @@ class DefaultDocumentProvider(DocumentProvider):
                 [],
                 [str(exc)],
             )
-

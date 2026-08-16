@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from reveal.core.interfaces.location_resolver import (
+from reveal.core.providers.interfaces.location_resolver import (
     LocationResolver,
 )
-from reveal.core.interfaces.registry import RegistryInterface
+from reveal.core.providers.interfaces.registry import RegistryInterface
 
 
 class LocationResolverRegistry(RegistryInterface[LocationResolver]):

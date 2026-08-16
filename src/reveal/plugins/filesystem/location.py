@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from reveal.core.models.location import SourceLocation
+from reveal.core.providers.models.location import SourceLocation
 
 
 class Location:

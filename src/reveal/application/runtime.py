@@ -1,8 +1,8 @@
-from reveal.core.providers.document import DefaultDocumentProvider
-from reveal.core.registry.content_provider import ContentProviderRegistry
-from reveal.core.registry.file_reader import FileReaderRegistry
-from reveal.core.registry.location_resolver import LocationResolverRegistry
-from reveal.core.registry.source_provider import SourceProviderRegistry
+from reveal.core.document.engine import DefaultDocumentProvider
+from reveal.core.providers.registry.content_provider import ContentProviderRegistry
+from reveal.core.providers.registry.file_reader import FileReaderRegistry
+from reveal.core.providers.registry.location_resolver import LocationResolverRegistry
+from reveal.core.providers.registry.source_provider import SourceProviderRegistry
 
 
 class RevealRuntime:

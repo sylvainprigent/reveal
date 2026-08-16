@@ -1,8 +1,8 @@
 from pathlib import Path
 
 from reveal.application.runtime import RevealRuntime
-from reveal.core.models.document import Document
-from reveal.core.models.location import SourceLocation
+from reveal.core.providers.models.document import Document
+from reveal.core.providers.models.location import SourceLocation
 
 
 _runtime = RevealRuntime()

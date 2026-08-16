@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Protocol
 
-from reveal.core.models.location import SourceLocation
+from reveal.core.providers.models.location import SourceLocation
 
 
 class LocationResolver(Protocol):

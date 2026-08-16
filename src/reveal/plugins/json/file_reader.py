@@ -3,11 +3,11 @@
 import json
 from typing import Any, BinaryIO
 
-from reveal.core.interfaces.file_reader import FileReader
-from reveal.core.models.document import DocumentNode
-from reveal.core.models.enums import NodeKind
-from reveal.core.models.read import ReadResult
-from reveal.core.models.source import Source
+from reveal.core.providers.interfaces.file_reader import FileReader
+from reveal.core.providers.models.document import DocumentNode
+from reveal.core.providers.models.enums import NodeKind
+from reveal.core.providers.models.read import ReadResult
+from reveal.core.providers.models.source import Source
 
 
 class JsonFileReader(FileReader):

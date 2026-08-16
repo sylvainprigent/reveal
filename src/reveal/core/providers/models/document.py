@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 from datetime import timedelta
-from enum import Enum
-from typing import Any
 
 from pydantic import Field
 
-from reveal.core.models.node import DocumentNode
-from reveal.core.models.read import ReadError, ReadWarning
+from reveal.core.providers.models.node import DocumentNode
+from reveal.core.providers.models.read import ReadError, ReadWarning
 
 from .common import CoreModel, IdentifiedModel
 from .source import Source

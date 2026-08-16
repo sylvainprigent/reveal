@@ -1,6 +1,6 @@
-from reveal.core.interfaces.registry import RegistryInterface
-from reveal.core.interfaces.source_provider import SourceProvider
-from reveal.core.models.location import SourceLocation
+from reveal.core.providers.interfaces.registry import RegistryInterface
+from reveal.core.providers.interfaces.source_provider import SourceProvider
+from reveal.core.providers.models.location import SourceLocation
 
 
 class SourceProviderRegistry(

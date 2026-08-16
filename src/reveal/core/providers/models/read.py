@@ -3,8 +3,8 @@ from uuid import UUID
 
 from pydantic import Field
 
-from reveal.core.models.common import CoreModel
-from reveal.core.models.node import DocumentNode
+from reveal.core.providers.models.common import CoreModel
+from reveal.core.providers.models.node import DocumentNode
 
 
 class ReadResult(CoreModel):

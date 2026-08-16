@@ -5,8 +5,8 @@ from typing import Any
 
 from pydantic import Field
 
-from reveal.core.models.common import CoreModel
-from reveal.core.models.enums import NodeKind
+from reveal.core.providers.models.common import CoreModel
+from reveal.core.providers.models.enums import NodeKind
 
 
 

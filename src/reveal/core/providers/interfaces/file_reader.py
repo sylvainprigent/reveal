@@ -1,8 +1,7 @@
 from typing import BinaryIO, Protocol
 
-from reveal.core.models.read import ReadResult
-from reveal.core.models.source import Source
-from reveal.core.models.document import Document
+from reveal.core.providers.models.read import ReadResult
+from reveal.core.providers.models.source import Source
 
 
 class FileReader(Protocol):
