@@ -1,4 +1,6 @@
 from __future__ import annotations
+import json
+from datetime import datetime, timezone
 
 import sqlite3
 from pathlib import Path
@@ -14,6 +16,11 @@ from reveal.core.relational.models import (
     RelationalType,
     TableModel,
 )
+
+from reveal.core.providers.models.document import DocumentMetadata
+from reveal.core.structure.models import StructureModel
+from reveal.core.semantic.models import SemanticModel
+from reveal.core.quality.models import QualityModel
 
 
 class SQLiteDatabaseGenerator:
@@ -56,6 +63,10 @@ class SQLiteDatabaseGenerator:
                     table,
                 )
 
+            self._create_metadata_tables(
+                connection
+            )    
+
             connection.commit()
 
     def load_data(
@@ -89,6 +100,31 @@ class SQLiteDatabaseGenerator:
             )
 
             connection.commit()
+
+
+    def _create_metadata_tables(
+        self,
+        connection: sqlite3.Connection,
+    ) -> None:
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS reveal_metadata (
+                key TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            )
+            """
+        )
+
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS reveal_analysis (
+                analysis_type TEXT PRIMARY KEY,
+                version INTEGER NOT NULL,
+                created_at TEXT NOT NULL,
+                payload TEXT NOT NULL
+            )
+            """
+        )
 
     # ------------------------------------------------------------------
     # Schema creation
@@ -910,3 +946,173 @@ class SQLiteDatabaseGenerator:
                 return False
 
         return True
+
+
+    # ------------------------------------------------------------------
+    # Naming / identifiers
+    # ------------------------------------------------------------------
+    def save_metadata(
+        self,
+        metadata: DocumentMetadata,
+    ) -> None:
+        #self._ensure_database()
+
+        payload = metadata.model_dump_json()
+
+        with sqlite3.connect(self.location) as connection:
+            connection.execute(
+                """
+                INSERT INTO reveal_metadata (
+                    key,
+                    value
+                )
+                VALUES (?, ?)
+                ON CONFLICT(key)
+                DO UPDATE SET
+                    value = excluded.value
+                """,
+                (
+                    "document",
+                    payload,
+                ),
+            )
+
+            connection.commit()
+
+
+    def load_metadata(
+        self,
+    ) -> DocumentMetadata | None:
+        self._ensure_database()
+
+        with sqlite3.connect(self.location) as connection:
+            row = connection.execute(
+                """
+                SELECT value
+                FROM reveal_metadata
+                WHERE key = ?
+                """,
+                ("document",),
+            ).fetchone()
+
+        if row is None:
+            return None
+
+        return DocumentMetadata.model_validate_json(
+            row[0]
+        )
+
+
+    def _save_analysis(
+        self,
+        analysis_type: str,
+        model: Any,
+    ) -> None:
+        #self._ensure_database()
+
+        payload = model.model_dump_json()
+
+        created_at = datetime.now(
+            timezone.utc
+        ).isoformat()
+
+        with sqlite3.connect(self.location) as connection:
+            connection.execute(
+                """
+                INSERT INTO reveal_analysis (
+                    analysis_type,
+                    version,
+                    created_at,
+                    payload
+                )
+                VALUES (?, ?, ?, ?)
+                ON CONFLICT(analysis_type)
+                DO UPDATE SET
+                    version = excluded.version,
+                    created_at = excluded.created_at,
+                    payload = excluded.payload
+                """,
+                (
+                    analysis_type,
+                    1,
+                    created_at,
+                    payload,
+                ),
+            )
+
+            connection.commit()
+
+    def _load_analysis(
+        self,
+        analysis_type: str,
+        model_type: type[Any],
+    ) -> Any | None:
+        self._ensure_database()
+
+        with sqlite3.connect(self.location) as connection:
+            row = connection.execute(
+                """
+                SELECT payload
+                FROM reveal_analysis
+                WHERE analysis_type = ?
+                """,
+                (analysis_type,),
+            ).fetchone()
+
+        if row is None:
+            return None
+
+        return model_type.model_validate_json(
+            row[0]
+        )
+
+    def save_structure(
+        self,
+        model: StructureModel,
+    ) -> None:
+        self._save_analysis(
+            analysis_type="structure",
+            model=model,
+        )
+
+    def load_structure(
+        self,
+    ) -> StructureModel | None:
+        return self._load_analysis(
+            analysis_type="structure",
+            model_type=StructureModel,
+        )
+
+    def save_semantic(
+        self,
+        model: SemanticModel,
+    ) -> None:
+        self._save_analysis(
+            analysis_type="semantic",
+            model=model,
+        )
+
+    def load_semantic(
+        self,
+    ) -> SemanticModel | None:
+        return self._load_analysis(
+            analysis_type="semantic",
+            model_type=SemanticModel,
+        )
+
+    def save_quality(
+        self,
+        model: QualityModel,
+    ) -> None:
+        self._save_analysis(
+            analysis_type="quality",
+            model=model,
+        )
+
+    def load_quality(
+        self,
+    ) -> QualityModel | None:
+        return self._load_analysis(
+            analysis_type="quality",
+            model_type=QualityModel,
+        )

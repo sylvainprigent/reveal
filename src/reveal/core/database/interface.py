@@ -1,8 +1,11 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from reveal.core.providers.models.document import DocumentNode
+from reveal.core.providers.models.document import DocumentMetadata, DocumentNode
+from reveal.core.quality.models import QualityModel
 from reveal.core.relational.models import RelationalModel
+from reveal.core.semantic.models import SemanticModel
+from reveal.core.structure.models import StructureModel
 
 
 class DatabaseGenerator(ABC):
@@ -48,3 +51,55 @@ class DatabaseGenerator(ABC):
         :param root: Root node of the document to load.
         :param model: Relational model describing the target schema.
         """
+
+    @abstractmethod
+    def save_metadata(
+        self,
+        metadata: DocumentMetadata,
+    ) -> None:
+        ...
+
+    @abstractmethod
+    def load_metadata(
+        self,
+    ) -> DocumentMetadata | None:
+        ...
+
+    @abstractmethod
+    def save_structure(
+        self,
+        model: StructureModel,
+    ) -> None:
+        ...
+
+    @abstractmethod
+    def load_structure(
+        self,
+    ) -> StructureModel | None:
+        ...
+
+    @abstractmethod
+    def save_semantic(
+        self,
+        model: SemanticModel,
+    ) -> None:
+        ...
+
+    @abstractmethod
+    def load_semantic(
+        self,
+    ) -> SemanticModel | None:
+        ...
+
+    @abstractmethod
+    def save_quality(
+        self,
+        model: QualityModel,
+    ) -> None:
+        ...
+
+    @abstractmethod
+    def load_quality(
+        self,
+    ) -> QualityModel | None:
+        ...
