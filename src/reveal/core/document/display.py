@@ -3,8 +3,10 @@ from typing import Any
 from rich.console import Console
 from rich.tree import Tree
 
-from reveal.core.providers.models.enums import NodeKind
-from reveal.core.providers.models.node import DocumentNode
+from reveal.core.content.models import (
+    NodeKind,
+    DocumentNode
+)
 
 
 def print_document_node(

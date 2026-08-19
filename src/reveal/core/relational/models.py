@@ -2,7 +2,7 @@ from enum import Enum
 
 from pydantic import Field
 
-from reveal.core.providers.models.common import CoreModel
+from reveal.core.common.models import CoreModel
 
 
 class RelationalType(str, Enum):

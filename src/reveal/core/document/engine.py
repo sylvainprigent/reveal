@@ -1,22 +1,31 @@
 from datetime import datetime
 
-from reveal.core.providers.interfaces.document_provider import (
+from reveal.core.document.interfaces import (
     DocumentProvider,
 )
-from reveal.core.providers.models.document import (
+from reveal.core.document.models import (
     Document,
     DocumentMetadata,
 )
-from reveal.core.providers.models.enums import NodeKind, SourceType
-from reveal.core.providers.models.node import DocumentNode
-from reveal.core.providers.models.source import Source
-from reveal.core.providers.registry.content_provider import (
-    ContentProviderRegistry,
+
+from reveal.core.content.models import (
+    NodeKind,
+    DocumentNode
 )
-from reveal.core.providers.registry.file_reader import (
+
+from reveal.core.source.models import (
+    SourceType,
+    Source
+)
+
+from reveal.core.content.registry import (
+    ContentProviderRegistry
+)
+
+from reveal.core.filereader.registry import (
     FileReaderRegistry,
 )
-from reveal.core.providers.registry.source_provider import (
+from reveal.core.source.registry import (
     SourceProviderRegistry,
 )
 

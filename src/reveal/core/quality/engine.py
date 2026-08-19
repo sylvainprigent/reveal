@@ -1,4 +1,4 @@
-from reveal.core.providers.models.node import DocumentNode
+from reveal.core.content.models import DocumentNode
 from reveal.core.quality.models import (
     QualityIssue,
     QualityIssueType,

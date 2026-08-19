@@ -1,7 +1,7 @@
 import re
 from collections.abc import Iterable
 
-from reveal.core.providers.models.node import DocumentNode
+from reveal.core.content.models import DocumentNode
 from reveal.core.semantic.models import (
     SemanticEvidence,
     SemanticEvidenceType,

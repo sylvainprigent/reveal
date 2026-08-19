@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
-from reveal.core.providers.models.enums import NodeKind
-from reveal.core.providers.models.node import DocumentNode
+from reveal.core.content.models import (
+    NodeKind,
+    DocumentNode
+)
 from reveal.core.relational.models import (
     ColumnModel,
     ColumnNullability,

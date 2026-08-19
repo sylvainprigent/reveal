@@ -1,4 +1,4 @@
-from reveal.application.api import export, inspect, load
+from reveal.api.api import export, inspect, load
 
 __all__ = [
     "load",

@@ -1,6 +1,6 @@
 from enum import Enum
 
-from reveal.core.providers.models.common import CoreModel
+from reveal.core.common.models import CoreModel
 
 
 class SemanticType(str, Enum):
