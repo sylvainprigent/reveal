@@ -5,7 +5,7 @@ from reveal.core.document.models import DocumentMetadata
 from reveal.core.quality.models import QualityModel
 from reveal.core.relational.models import ColumnModel, ColumnNullability, ForeignKeyModel, RelationalModel, TableModel
 from reveal.core.semantic.models import SemanticModel
-from reveal.core.storage.interface import StorageBackend
+from reveal.core.storage.interfaces import StorageBackend
 from reveal.core.storage.models import StorageColumn, StorageForeignKey
 from reveal.core.structure.models import StructureModel
 

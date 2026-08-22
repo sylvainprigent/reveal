@@ -7,16 +7,47 @@ from reveal.core.document.models import DocumentMetadata
 from reveal.core.quality.models import QualityModel
 from reveal.core.relational.models import ColumnNullability, RelationalType
 from reveal.core.semantic.models import SemanticModel
-from reveal.core.storage.interface import StorageBackend
+from reveal.core.storage.interfaces import StorageBackend
 from reveal.core.storage.models import StorageColumn, StorageForeignKey
 from reveal.core.structure.models import StructureModel
 
 
 class SQLiteBackend(StorageBackend):
 
-    def __init__(self, location: Path):
-        self.location = Path(location)
+    def __init__(self, location: Path | None = None):
+        if location is not None:
+            self.location = Path(location)
         self.connection: sqlite3.Connection | None = None
+
+    def supports(self, value: str | Path) -> bool:
+        path = Path(value)
+        self.location = path
+
+        print("PATH RESOLVE LOWER = ", path.suffix.lower())
+        if path.suffix.lower() in {".sqlite", ".sqlite3"}:
+            return True
+
+        if path.suffix.lower() == ".db":
+            # If the file des not exists, I will create a sqlite storage
+            if not path.is_file():
+                return True
+            # otherwise, I check the header
+            return self.is_sqlite_database(path)
+
+        return False
+
+    def is_sqlite_database(path: str | Path) -> bool:
+        """Return True if the file appears to be a SQLite database."""
+        path = Path(path)
+
+        try:
+            with path.open("rb") as f:
+                header = f.read(16)
+
+            return header == b"SQLite format 3\x00"
+
+        except (OSError, PermissionError):
+            return False
 
     def open(self) -> None:
         self.location.parent.mkdir(
@@ -396,3 +427,6 @@ class SQLiteBackend(StorageBackend):
             analysis_type="quality",
             model_type=QualityModel,
         )
+
+
+export = [SQLiteBackend]

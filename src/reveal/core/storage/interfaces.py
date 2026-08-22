@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from pathlib import Path
 from typing import Any
 
 from reveal.core.document.models import DocumentMetadata
@@ -20,6 +21,10 @@ class StorageBackend(ABC):
     A backend only translates generic storage instructions
     into its concrete storage technology.
     """
+
+    @abstractmethod
+    def supports(self, value: str | Path) -> bool:
+        ...
 
     @abstractmethod
     def open(self) -> None:
