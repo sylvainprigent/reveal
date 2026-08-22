@@ -4,12 +4,12 @@ import pytest
 
 from reveal.core.models.enums import NodeKind
 from reveal.core.models.source import Source
-from reveal.plugins.filesystem import (
+from reveal.plugins.rv_filesystem import (
     LocalFileSystemContentProvider,
     LocalFileSystemSourceProvider,
 )
-from reveal.plugins.filesystem.location import Location
-from reveal.plugins.json import JsonFileReader
+from reveal.plugins.rv_filesystem.location import Location
+from reveal.plugins.rv_json import JsonFileReader
 
 
 DATA_DIR = Path(__file__).parent / "data"
